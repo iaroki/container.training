@@ -63,15 +63,16 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker kill web
 ExecStartPre=-/usr/bin/docker rm web
-ExecStart=/usr/bin/docker run --rm \
-                          --name web \
-                          --p 8080:80 \
-                          nginx
+ExecStart=/usr/bin/docker run --rm --name web -p 8080:80 nginx
 ExecStop=/usr/bin/docker stop web
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+---
+
+## Systemd .service file
 
 Reload systemd daemon:
 `# systemctl daemon-reload`
@@ -84,7 +85,6 @@ Enable web.service:
 
 * Shortcut to start and enable service in one command:
 `# systemctl enable --now web.service`
-
 
 ---
 
